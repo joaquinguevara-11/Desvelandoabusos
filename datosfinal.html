@@ -52,6 +52,12 @@
       /* más espacio interior */
     }
 
+    #step5 {
+      max-width: 800px;
+      /* más ancho que el paso 1 */
+      padding: 2rem;
+      /* más espacio interior */
+    }
 
     .step.active {
       display: block;
@@ -111,7 +117,10 @@
   <!-- Menú superior -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="#">Desvelandoabusos.pe</a>
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+            <img src="img/logo.jpeg" alt="Logo" width="40" height="40" class="me-2 rounded-circle">
+            Desvelandoabusos.pe
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -325,7 +334,7 @@
   <script>
 
     (function () {
-      emailjs.init("aws-vqt5HvFTwvZmH"); // Reemplaza con tu PUBLIC KEY
+      emailjs.init("cshAx5SgDNY9cZGJg"); // Reemplaza con tu PUBLIC KEY
     })();
 
 
@@ -417,7 +426,7 @@ btnTerminar.addEventListener('click', () => {
         "\n🖊️ Descripción: " + descripcion);
 
   // Aquí se envía con EmailJS
-  emailjs.send("service_0tuuv7b", "template_36oovr6", {
+  emailjs.send("service_38709cl", "template_gg9cuy5", {
     nombres: usuario.nombres,
     dni: usuario.dni,
     correo: usuario.correo,
