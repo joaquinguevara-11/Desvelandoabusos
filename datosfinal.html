@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Registro de Denuncia</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Librería de EmailJS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      padding-top: 56px;
+      /* espacio para navbar si lo usas */
+    }
+
+    .step {
+      width: 100%;
+      max-width: 400px;
+      padding: 1.5rem;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+      display: none;
+    }
+
+    #step2 {
+      max-width: 800px;
+      /* más ancho que el paso 1 */
+      padding: 2rem;
+      /* más espacio interior */
+    }
+
+    #step3 {
+      max-width: 800px;
+      /* más ancho que el paso 1 */
+      padding: 2rem;
+      /* más espacio interior */
+    }
+
+    #step4 {
+      max-width: 800px;
+      /* más ancho que el paso 1 */
+      padding: 2rem;
+      /* más espacio interior */
+    }
+
+
+    .step.active {
+      display: block;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid rgba(13, 110, 253, 0.08);
+    }
+
+    .small-note {
+      font-size: .85rem;
+      color: #6c757d;
+    }
+
+    .card-tipo {
+      cursor: pointer;
+      border: 2px solid;
+      transition: 0.2s ease-in-out;
+      border-radius: 0.75rem;
+    }
+
+    .btn-check:checked+.card-tipo {
+      border-color: #0d6efd;
+      box-shadow: 0 0 10px rgba(13, 110, 253, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .card-tipo:hover {
+      border-color: #6c757d;
+    }
+
+    .abogado-card {
+      cursor: pointer;
+      border: 2px solid;
+      transition: 0.2s ease-in-out;
+      border-radius: 0.75rem;
+    }
+
+    .btn-check:checked+.abogado-card {
+      border-color: #198754;
+      box-shadow: 0 0 10px rgba(25, 135, 84, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .abogado-card:hover {
+      border-color: #6c757d;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Menú superior -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">Desvelandoabusos.pe</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#tipos">Tipos</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#participa">Participa</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Paso 1 -->
+  <div id="step1" class="step active text-center">
+    <div class="mb-2">
+      <img
+        src="https://w7.pngwing.com/pngs/844/95/png-transparent-anonymity-person-computer-icons-word-of-mouth-silhouette-business-internet.png"
+        alt="avatar" class="avatar mb-2">
+      <h5 class="mb-1 fw-bold">Registro de Denuncia</h5>
+      <p class="small-note mb-2">Ingresa tus datos para continuar</p>
+    </div>
+
+    <form id="formStep1" novalidate>
+      <div class="mb-2 text-start">
+        <label for="nombres" class="form-label">Nombres completos</label>
+        <input id="nombres" name="nombres" type="text" class="form-control form-control-sm" required minlength="3">
+        <div class="invalid-feedback">Ingresa tus nombres completos.</div>
+      </div>
+
+      <div class="mb-2 text-start">
+        <label for="dni" class="form-label">DNI</label>
+        <input id="dni" name="dni" type="text" inputmode="numeric" pattern="\d{8}" maxlength="8"
+          class="form-control form-control-sm" placeholder="8 dígitos" required>
+        <div class="form-text">Solo números, 8 dígitos.</div>
+        <div class="invalid-feedback">DNI inválido (debe tener 8 dígitos).</div>
+      </div>
+
+      <div class="mb-3 text-start">
+        <label for="correo" class="form-label">Correo electrónico</label>
+        <input id="correo" name="correo" type="email" class="form-control form-control-sm" required>
+        <div class="invalid-feedback">Ingresa un correo válido.</div>
+      </div>
+
+      <button type="button" id="btnContinuar1" class="btn btn-primary w-100 btn-sm">Continuar</button>
+    </form>
+  </div>
+
+  <!-- Paso 2 -->
+  <div id="step2" class="step text-center">
+    <h5 class="fw-bold mb-3">Paso 2 - Selecciona el tipo de denuncia</h5>
+    <form id="formStep2" novalidate>
+      <div class="row g-3">
+        <div class="col-12 col-md-6">
+          <input type="radio" class="btn-check" name="tipoDenuncia" id="tipo1" value="Coimas" required>
+          <label class="card p-3 h-100 card-tipo" for="tipo1">
+            <div class="fs-1 text-primary mb-2"><i class="bi bi-cash-coin"></i></div>
+            <h6 class="fw-bold">Coimas</h6>
+          </label>
+        </div>
+        <div class="col-12 col-md-6">
+          <input type="radio" class="btn-check" name="tipoDenuncia" id="tipo2" value="Nepotismo" required>
+          <label class="card p-3 h-100 card-tipo" for="tipo2">
+            <div class="fs-1 text-danger mb-2"><i class="bi bi-people-fill"></i></div>
+            <h6 class="fw-bold">Nepotismo</h6>
+          </label>
+        </div>
+        <div class="col-12 col-md-6">
+          <input type="radio" class="btn-check" name="tipoDenuncia" id="tipo3" value="Acoso laboral" required>
+          <label class="card p-3 h-100 card-tipo" for="tipo3">
+            <div class="fs-1 text-warning mb-2"><i class="bi bi-exclamation-triangle"></i></div>
+            <h6 class="fw-bold">Acoso laboral</h6>
+          </label>
+        </div>
+        <div class="col-12 col-md-6">
+          <input type="radio" class="btn-check" name="tipoDenuncia" id="tipo4" value="Sobornos" required>
+          <label class="card p-3 h-100 card-tipo" for="tipo4">
+            <div class="fs-1 text-secondary mb-2"><i class="bi bi-currency-exchange"></i></div>
+            <h6 class="fw-bold">Sobornos</h6>
+          </label>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between mt-4">
+        <button type="button" id="btnBack2" class="btn btn-secondary btn-sm">Atrás</button>
+        <button type="button" id="btnContinuar2" class="btn btn-primary btn-sm">Continuar</button>
+      </div>
+    </form>
+  </div>
+
+
+  <!-- Paso 3 -->
+  <div id="step3" class="step text-center">
+    <h5 class="fw-bold mb-3">Paso 3 - Elige un abogado
+    </h5>
+
+    <form id="formStep3" novalidate>
+      <div class="row g-3">
+
+        <div class="col-12 col-md-6">
+          <input type="radio" class="btn-check" name="abogado" id="ab1" value="Juan Pérez" required>
+          <label class="card p-3 h-100 abogado-card" for="ab1">
+            <div class="d-flex align-items-center gap-3">
+              <img src="https://randomuser.me/api/portraits/men/45.jpg" class="rounded-circle" alt="Abogado 1">
+              <div>
+                <h5 class="mb-1">Dr. Juan Pérez</h5>
+                <p class="mb-0">Tel: 987654321</p>
+                <div class="text-muted small abogado-especialidad">Especialista en casos de corrupción</div>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <input type="radio" class="btn-check" name="abogado" id="ab2" value="María López">
+          <label class="card p-3 h-100 abogado-card" for="ab2">
+            <div class="d-flex align-items-center gap-3">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" class="rounded-circle" alt="Abogado 2">
+              <div>
+                <h5 class="mb-1">Dra. María López</h5>
+                <p class="mb-0">Tel: 912345678</p>
+                <div class="text-muted small abogado-especialidad">Especialista en casos de corrupción</div>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <input type="radio" class="btn-check" name="abogado" id="ab3" value="Carlos Ramírez">
+          <label class="card p-3 h-100 abogado-card" for="ab3">
+            <div class="d-flex align-items-center gap-3">
+              <img src="https://randomuser.me/api/portraits/men/12.jpg" class="rounded-circle" alt="Abogado 3">
+              <div>
+                <h5 class="mb-1">Dr. Luis Gómez</h5>
+                <p class="mb-0">Tel: 999888777</p>
+                <div class="text-muted small abogado-especialidad">Especialista en casos de corrupción</div>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <input type="radio" class="btn-check" name="abogado" id="ab4" value="Laura Fernández">
+          <label class="card p-3 h-100 abogado-card" for="ab4">
+            <div class="d-flex align-items-center gap-3">
+              <img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle" alt="Abogado 4">
+              <div>
+                <h5 class="mb-1">Dra. Ana Torres</h5>
+                <p class="mb-0">Tel: 955123456</p>
+                <div class="text-muted small abogado-especialidad">Especialista en casos de corrupción</div>
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between mt-4">
+        <button type="button" id="btnBack3" class="btn btn-secondary btn-sm">Atrás</button>
+        <button type="submit" class="btn btn-success btn-sm">Continuar</button>
+      </div>
+    </form>
+  </div>
+
+
+  <!-- Paso 4 - Descripción de la denuncia -->
+<div id="step4" class="step text-center">
+  <h5 class="fw-bold mb-3">Paso 4 - Describe tu denuncia</h5>
+
+  <form id="formStep4" novalidate>
+    <div class="mb-3 text-start">
+      <label for="descripcion" class="form-label">Descripción</label>
+      <textarea id="descripcion" name="descripcion" class="form-control" rows="5" required
+        placeholder="Escribe aquí los detalles de tu denuncia..."></textarea>
+      <div class="invalid-feedback">Por favor, describe tu denuncia.</div>
+    </div>
+
+        <!-- Adjuntar archivos -->
+    <div class="mb-3">
+        <label for="adjuntos" class="form-label">Adjuntar pruebas (imágenes o PDF)</label>
+        <input type="file" id="adjuntos" class="form-control" accept="image/*,.pdf" multiple>
+        <div id="fileList" class="mt-2 text-muted"></div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-4">
+      <button type="button" id="btnBack4" class="btn btn-secondary btn-sm">Atrás</button>
+      <button type="submit" id="btnContinuar4" class="btn btn-primary btn-sm">Continuar</button>
+    </div>
+  </form>
+</div>
+
+
+<!-- Paso 5 -->
+<div id="step5" class="step text-center">
+  <!-- Sección Mensaje Final -->
+  <div class="bg-primary text-white d-flex flex-column justify-content-center align-items-center seccion-mensaje p-5 rounded">
+    <h1 class="display-3 fw-bold mb-4 text-center">La transparencia es fortaleza</h1>
+    <button class="btn btn-success btn-lg px-5 py-3 mb-4 rounded-pill shadow-lg fw-bold" id="btnTerminar">
+      ✅ Terminar
+    </button>
+  </div>
+
+  <div class="d-flex justify-content-between mt-4">
+      <button type="button" id="btnBack5" class="btn btn-secondary btn-sm">Atrás</button>
+  </div>
+</div>
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+
+    (function () {
+      emailjs.init("aws-vqt5HvFTwvZmH"); // Reemplaza con tu PUBLIC KEY
+    })();
+
+
+    // Paso 1
+    const formStep1 = document.getElementById('formStep1');
+    const btnContinuar1 = document.getElementById('btnContinuar1');
+
+    btnContinuar1.addEventListener('click', () => {
+      if (!formStep1.checkValidity()) {
+        formStep1.classList.add('was-validated');
+        return;
+      }
+      const usuario = {
+        nombres: document.getElementById('nombres').value.trim(),
+        dni: document.getElementById('dni').value.trim(),
+        correo: document.getElementById('correo').value.trim(),
+      };
+      localStorage.setItem('denuncia_usuario', JSON.stringify(usuario));
+      showStep(2);
+    });
+
+    // Paso 2
+    const formStep2 = document.getElementById('formStep2');
+    const btnContinuar2 = document.getElementById('btnContinuar2');
+    const btnBack2 = document.getElementById('btnBack2');
+
+    btnContinuar2.addEventListener('click', () => {
+      const selected = document.querySelector('input[name="tipoDenuncia"]:checked');
+      if (!selected) {
+        alert("⚠️ Debes seleccionar un tipo de denuncia.");
+        return;
+      }
+      localStorage.setItem('tipo_denuncia', selected.value);
+      showStep(3); // avanzar al paso 3
+    });
+
+    btnBack2.addEventListener('click', () => showStep(1));
+
+    // Paso 3
+    const formStep3 = document.getElementById('formStep3');
+    const btnBack3 = document.getElementById('btnBack3');
+
+    formStep3.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const selectedAbogado = document.querySelector('input[name="abogado"]:checked');
+      if (!selectedAbogado) {
+        alert("⚠️ Debes seleccionar un abogado.");
+        return;
+      }
+      localStorage.setItem('abogado', selectedAbogado.value);
+      showStep(4); // en lugar de mostrar alerta, pasamos al paso 4
+    });
+
+    btnBack3.addEventListener('click', () => showStep(2));
+
+
+    // Paso 4
+const formStep4 = document.getElementById('formStep4');
+const btnBack4 = document.getElementById('btnBack4');
+
+formStep4.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const descripcion = document.getElementById('descripcion').value.trim();
+  if (!descripcion) {
+    alert("⚠️ Debes escribir una descripción.");
+    return;
+  }
+  localStorage.setItem('descripcion_denuncia', descripcion);
+  showStep(5); // Ir al paso final
+});
+
+btnBack4.addEventListener('click', () => showStep(3));
+
+
+
+
+btnTerminar.addEventListener('click', () => {
+  const usuario = JSON.parse(localStorage.getItem('denuncia_usuario')) || {};
+  const tipo = localStorage.getItem('tipo_denuncia') || "No seleccionado";
+  const abogado = localStorage.getItem('abogado') || "No seleccionado";
+  const descripcion = localStorage.getItem('descripcion_denuncia') || "No ingresada";
+
+  alert("✅ Denuncia registrada correctamente.\n\n" +
+        "👤 Nombres: " + (usuario.nombres || "No ingresado") +
+        "\n🪪 DNI: " + (usuario.dni || "No ingresado") +
+        "\n📧 Correo: " + (usuario.correo || "No ingresado") +
+        "\n📝 Tipo de denuncia: " + tipo +
+        "\n⚖️ Abogado: " + abogado +
+        "\n🖊️ Descripción: " + descripcion);
+
+  // Aquí se envía con EmailJS
+  emailjs.send("service_0tuuv7b", "template_36oovr6", {
+    nombres: usuario.nombres,
+    dni: usuario.dni,
+    correo: usuario.correo,
+    tipo_denuncia: tipo,
+    abogado: abogado,
+    descripcion: descripcion
+  }).then(() => {
+    window.location.href = "index.html";
+  }).catch(err => {
+    alert("❌ Error al enviar correo: " + JSON.stringify(err));
+  });
+});
+
+
+
+
+
+
+
+
+
+
+    // Función para cambiar de paso
+    function showStep(n) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById('step' + n).classList.add('active');
+
+      if (n === 3) {
+        const tipo = localStorage.getItem('tipo_denuncia');
+        if (tipo) {
+          document.querySelectorAll('.abogado-especialidad').forEach(el => {
+            el.textContent = "Especialista en " + tipo;
+          });
+        }
+      }
+
+    }
+  </script>
+</body>
+
+</html>

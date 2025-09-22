@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Desvelandoabusos.pe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        /* Para que las imágenes del carrusel ocupen toda la pantalla */
+        .carousel-item img {
+            height: calc(100vh - 56px);
+            object-fit: cover;
+        }
+
+        /* Fondo oscuro detrás del texto */
+        .carousel-caption {
+            background: rgba(0, 0, 0, 0.5);
+            /* negro con 50% de transparencia */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Menú superior -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <div></div>
+
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
+            <img src="img/logo.jpeg" alt="Logo" width="40" height="40" class="me-2 rounded-circle">
+            Desvelandoabusos.pe
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tipos">Tipos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#participa">Denunciar</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Carrusel -->
+    <section id="carrusel" class="carousel slide" data-bs-ride="carousel" style="margin-top: 56px;">
+        <!-- Indicadores -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carrusel" data-bs-slide-to="0" class="active"
+                aria-current="true"></button>
+            <button type="button" data-bs-target="#carrusel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#carrusel" data-bs-slide-to="2"></button>
+        </div>
+
+        <!-- Slides -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://c.files.bbci.co.uk/58A2/production/_106309622_gettyimages-928085588.jpg"
+                    class="d-block w-100" alt="Corrupción 1">
+                <div class="container">
+                    <div class="carousel-caption text-start">
+                        <h1>Denuncia los actos de corrupción</h1>
+                        <p>Tu voz puede generar un gran cambio.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://www.esan.edu.pe/images/blog/2015/09/28/corrupcion-leonarte-principal.jpg"
+                    class="d-block w-100" alt="Corrupción 2">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>La corrupción nos afecta a todos</h1>
+                        <p>Unidos podemos combatirla.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://www.udep.edu.pe/hoy/wp-content/uploads/sites/49/2021/12/CUERPO-DE-TEXTO-1920X1080-2021-12-15T110607.412.png"
+                    class="d-block w-100" alt="Corrupción 3">
+                <div class="container">
+                    <div class="carousel-caption text-end">
+                        <h1>¡Sé parte del cambio!</h1>
+                        <p>Tu denuncia puede marcar la diferencia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controles -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carrusel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carrusel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
+    </section>
+
+
+
+    <!-- Tipos de Corrupción -->
+    <section id="tipos" class="py-5 bg-light d-flex align-items-center" style="min-height: 100vh;">
+        <div class="container text-center">
+            <h2 class="mb-5 display-4 fw-bold">Tipos de Corrupción</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-cash-coin"></i> Soborno</h5>
+                            <p class="card-text">
+                                Consiste en ofrecer, dar o recibir beneficios económicos o favores con el fin de obtener
+                                ventajas indebidas.
+                                El soborno distorsiona la toma de decisiones, afecta la imparcialidad y promueve la
+                                impunidad.
+                                Ejemplo: un funcionario que acepta dinero para agilizar un trámite o ignorar una
+                                infracción.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-building"></i> Nepotismo</h5>
+                            <p class="card-text">
+                                Se produce cuando una autoridad designa a familiares, amigos o allegados en cargos
+                                públicos sin considerar
+                                sus méritos o capacidades. Esta práctica reduce la eficiencia institucional y limita las
+                                oportunidades
+                                para personas con verdadera preparación. Ejemplo: contratar a un pariente en un puesto
+                                clave sin concurso ni transparencia.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-bank"></i> Malversación</h5>
+                            <p class="card-text">
+                                Ocurre cuando los recursos públicos se desvían de su propósito legítimo para fines
+                                personales o ilegales.
+                                Esto afecta directamente a la ciudadanía, ya que el dinero destinado a servicios
+                                esenciales no cumple su objetivo.
+                                Ejemplo: usar fondos de salud o educación para beneficio personal o campañas políticas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Participación -->
+    <section id="participa" class="bg-primary text-white text-center"
+        style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+        <div class="container">
+            <h2 class="display-3 fw-bold mb-4">¡Participa en la lucha contra la corrupción!</h2>
+            <p class="lead mb-4">
+                <h2>La transparencia es fortaleza</h2>
+            </p>
+            <a href="datosfinal.html" class="btn btn-danger btn-lg px-5 py-3">Denuncia Ahora</a>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white py-3">
+        <div class="container text-center">
+            <p class="mb-0">© 2025 Plataforma Anticorrupción | Confidencialidad garantizada</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
