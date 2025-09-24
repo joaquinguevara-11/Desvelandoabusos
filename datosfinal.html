@@ -118,8 +118,11 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
-            <img src="logo.jpeg" alt="Logo" width="40" height="40" class="me-2 rounded-circle">
-            Desvelandoabusos.pe
+        <img src="logo.jpeg" alt="Logo" width="40" height="40" class="me-2 rounded-circle">
+        <div class="d-flex flex-column">
+          <span>Desvelandoabusos.pe</span>
+          <small class="fw-normal text-white">La transparencia es fortaleza</small>
+        </div>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
@@ -287,46 +290,47 @@
 
 
   <!-- Paso 4 - Descripción de la denuncia -->
-<div id="step4" class="step text-center">
-  <h5 class="fw-bold mb-3">Paso 4 - Describe tu denuncia</h5>
+  <div id="step4" class="step text-center">
+    <h5 class="fw-bold mb-3">Paso 4 - Describe tu denuncia</h5>
 
-  <form id="formStep4" novalidate>
-    <div class="mb-3 text-start">
-      <label for="descripcion" class="form-label">Descripción</label>
-      <textarea id="descripcion" name="descripcion" class="form-control" rows="5" required
-        placeholder="Escribe aquí los detalles de tu denuncia..."></textarea>
-      <div class="invalid-feedback">Por favor, describe tu denuncia.</div>
-    </div>
+    <form id="formStep4" novalidate>
+      <div class="mb-3 text-start">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <textarea id="descripcion" name="descripcion" class="form-control" rows="5" required
+          placeholder="Escribe aquí los detalles de tu denuncia..."></textarea>
+        <div class="invalid-feedback">Por favor, describe tu denuncia.</div>
+      </div>
 
-        <!-- Adjuntar archivos -->
-    <div class="mb-3">
+      <!-- Adjuntar archivos -->
+      <div class="mb-3">
         <label for="adjuntos" class="form-label">Adjuntar pruebas (imágenes o PDF)</label>
         <input type="file" id="adjuntos" class="form-control" accept="image/*,.pdf" multiple>
         <div id="fileList" class="mt-2 text-muted"></div>
+      </div>
+
+      <div class="d-flex justify-content-between mt-4">
+        <button type="button" id="btnBack4" class="btn btn-secondary btn-sm">Atrás</button>
+        <button type="submit" id="btnContinuar4" class="btn btn-primary btn-sm">Continuar</button>
+      </div>
+    </form>
+  </div>
+
+
+  <!-- Paso 5 -->
+  <div id="step5" class="step text-center">
+    <!-- Sección Mensaje Final -->
+    <div
+      class="bg-primary text-white d-flex flex-column justify-content-center align-items-center seccion-mensaje p-5 rounded">
+      <h1 class="display-3 fw-bold mb-4 text-center">La transparencia es fortaleza</h1>
+      <button class="btn btn-success btn-lg px-5 py-3 mb-4 rounded-pill shadow-lg fw-bold" id="btnTerminar">
+        ✅ Terminar
+      </button>
     </div>
 
     <div class="d-flex justify-content-between mt-4">
-      <button type="button" id="btnBack4" class="btn btn-secondary btn-sm">Atrás</button>
-      <button type="submit" id="btnContinuar4" class="btn btn-primary btn-sm">Continuar</button>
-    </div>
-  </form>
-</div>
-
-
-<!-- Paso 5 -->
-<div id="step5" class="step text-center">
-  <!-- Sección Mensaje Final -->
-  <div class="bg-primary text-white d-flex flex-column justify-content-center align-items-center seccion-mensaje p-5 rounded">
-    <h1 class="display-3 fw-bold mb-4 text-center">La transparencia es fortaleza</h1>
-    <button class="btn btn-success btn-lg px-5 py-3 mb-4 rounded-pill shadow-lg fw-bold" id="btnTerminar">
-      ✅ Terminar
-    </button>
-  </div>
-
-  <div class="d-flex justify-content-between mt-4">
       <button type="button" id="btnBack5" class="btn btn-secondary btn-sm">Atrás</button>
+    </div>
   </div>
-</div>
 
 
 
@@ -393,32 +397,32 @@
 
 
     // Paso 4
-const formStep4 = document.getElementById('formStep4');
-const btnBack4 = document.getElementById('btnBack4');
+    const formStep4 = document.getElementById('formStep4');
+    const btnBack4 = document.getElementById('btnBack4');
 
-formStep4.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const descripcion = document.getElementById('descripcion').value.trim();
-  if (!descripcion) {
-    alert("⚠️ Debes escribir una descripción.");
-    return;
-  }
-  localStorage.setItem('descripcion_denuncia', descripcion);
-  showStep(5); // Ir al paso final
-});
+    formStep4.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const descripcion = document.getElementById('descripcion').value.trim();
+      if (!descripcion) {
+        alert("⚠️ Debes escribir una descripción.");
+        return;
+      }
+      localStorage.setItem('descripcion_denuncia', descripcion);
+      showStep(5); // Ir al paso final
+    });
 
-btnBack4.addEventListener('click', () => showStep(3));
-
-
+    btnBack4.addEventListener('click', () => showStep(3));
 
 
-btnTerminar.addEventListener('click', () => {
-  const usuario = JSON.parse(localStorage.getItem('denuncia_usuario')) || {};
-  const tipo = localStorage.getItem('tipo_denuncia') || "No seleccionado";
-  const abogado = localStorage.getItem('abogado') || "No seleccionado";
-  const descripcion = localStorage.getItem('descripcion_denuncia') || "No ingresada";
 
-  alert("✅ Denuncia registrada correctamente.\n\n" +
+
+    btnTerminar.addEventListener('click', () => {
+      const usuario = JSON.parse(localStorage.getItem('denuncia_usuario')) || {};
+      const tipo = localStorage.getItem('tipo_denuncia') || "No seleccionado";
+      const abogado = localStorage.getItem('abogado') || "No seleccionado";
+      const descripcion = localStorage.getItem('descripcion_denuncia') || "No ingresada";
+
+      alert("✅ Denuncia registrada correctamente.\n\n" +
         "👤 Nombres: " + (usuario.nombres || "No ingresado") +
         "\n🪪 DNI: " + (usuario.dni || "No ingresado") +
         "\n📧 Correo: " + (usuario.correo || "No ingresado") +
@@ -426,20 +430,20 @@ btnTerminar.addEventListener('click', () => {
         "\n⚖️ Abogado: " + abogado +
         "\n🖊️ Descripción: " + descripcion);
 
-  // Aquí se envía con EmailJS
-  emailjs.send("service_38709cl", "template_gg9cuy5", {
-    nombres: usuario.nombres,
-    dni: usuario.dni,
-    correo: usuario.correo,
-    tipo_denuncia: tipo,
-    abogado: abogado,
-    descripcion: descripcion
-  }).then(() => {
-    window.location.href = "index.html";
-  }).catch(err => {
-    alert("❌ Error al enviar correo: " + JSON.stringify(err));
-  });
-});
+      // Aquí se envía con EmailJS
+      emailjs.send("service_38709cl", "template_gg9cuy5", {
+        nombres: usuario.nombres,
+        dni: usuario.dni,
+        correo: usuario.correo,
+        tipo_denuncia: tipo,
+        abogado: abogado,
+        descripcion: descripcion
+      }).then(() => {
+        window.location.href = "index.html";
+      }).catch(err => {
+        alert("❌ Error al enviar correo: " + JSON.stringify(err));
+      });
+    });
 
 
 
